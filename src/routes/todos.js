@@ -7,8 +7,12 @@ const todoRouter = express.Router();
 todoRouter.post(
   "/",
   TodoMiddleware.todoInputValidator,
-  TodoMiddleware.uniqueTodo,
+  // TodoMiddleware.uniqueTodo,
   todoController.createTodo
 );
+
+todoRouter.get("/", todoController.getAllTodos);
+
+todoRouter.get("/:id", todoController.getTodo);
 
 export default todoRouter;

@@ -1,7 +1,9 @@
 import todoValidator from "../validators/todoValidator";
 import todo from "../../database/models";
+import user from "../../database/models";
 
 const Todo = todo.Todo;
+const User = user.User;
 
 export default class TodoMiddleware {
   static todoInputValidator(req, res, next) {
@@ -12,16 +14,20 @@ export default class TodoMiddleware {
     next();
   }
 
-  static uniqueTodo(req, res, next) {
-    Todo.findOne({ where: { title: req.body.title } })
-      .then(todo => {
-        if (todo) {
-          return res.status(409).json({
-            message: "Todo with this title already added"
-          });
-        }
-        next();
-      })
-      .catch(next);
-  }
+  // static uniqueTodo(req, res, next) {
+  //   User.findByPk(req.user.id).then(user => {
+  //     Todo.findOne({ where: { title: req.body.title } })
+  //       .then(todo => {
+  //         console.log(todo.UserId);
+  //         console.log(req.user.id);
+  //         if (todo.UserId === req.user.id) {
+  //           return res.status(409).json({
+  //             message: "Todo with this title already added"
+  //           });
+  //         }
+  //         next();
+  //       })
+  //       .catch(next);
+  //   });
+  // }
 }

@@ -84,4 +84,24 @@ export default class TodoController {
       });
     }
   }
+
+  static async updateTodo(req, res) {
+    try {
+      const id = req.params.id;
+      const UserId = req.user.id;
+      const data = req.body;
+      const updatedTodo = await Todo.update(
+        { ...data },
+        { returning: true, where: { id, UserId } }
+      );
+      console.log(updatedTodo);
+      return res.status(202).json({
+        Message: "Todo updated successfully"
+      });
+    } catch (error) {
+      return res.status(400).json({
+        Message: "An error occured when trying to update a todo"
+      });
+    }
+  }
 }

@@ -8,7 +8,8 @@ export default class TodoController {
       console.log(title);
       const newTodo = await Todo.create({
         title,
-        content
+        content,
+        UserId: req.user.id
       });
       return res.status(201).json({
         Message: "Todo created successfully",

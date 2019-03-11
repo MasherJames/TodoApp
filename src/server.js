@@ -1,8 +1,10 @@
 import express from "express";
 import http from "http";
 import morgan from "morgan";
+import passport from "passport";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import passportConf from "./config/passport";
 import { todoRouter, userRouter } from "./routes";
 
 dotenv.config();
@@ -13,9 +15,15 @@ app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const prefix = "/api/v1";
+app.use(passport.initialize());
+passportConf(passport);
 
-app.use(`${prefix}/todo/`, todoRouter);
+const prefix = "/api/v1";
+app.use(
+  `${prefix}/todo/`,
+  passport.authenticate("jwt", { session: false }),
+  todoRouter
+);
 app.use(`${prefix}/users/`, userRouter);
 
 app.use("*", (req, res) => {

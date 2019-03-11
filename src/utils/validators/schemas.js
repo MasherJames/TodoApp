@@ -1,18 +1,41 @@
 import Joi from "joi";
 
-const userSchema = joi.object().keys({
+const userSchema = Joi.object().keys({
   username: Joi.string()
     .alphanum()
     .min(3)
     .max(30)
     .required(),
-  password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
-  email: Joi.string().email({ minDomainAtoms: 2 })
+  password: Joi.string()
+    .alphanum()
+    .min(6)
+    .max(15)
+    .required(),
+  email: Joi.string()
+    .email({ minDomainAtoms: 2 })
+    .required()
 });
 
-const todoSchema = joi.object.keys({
-  title: Joi.string().regex(/^[a-zA-Z]{2, 15}$/),
-  content: Joi.string().regex(/^[a-zA-Z0-9]{2, }$/)
+const userSchemaLogin = Joi.object().keys({
+  password: Joi.string()
+    .alphanum()
+    .min(6)
+    .max(15)
+    .required(),
+  email: Joi.string()
+    .email({ minDomainAtoms: 2 })
+    .required()
 });
 
-export { userSchema, todoSchema };
+const todoSchema = Joi.object().keys({
+  title: Joi.string()
+    .min(2)
+    .max(15)
+    .required(),
+  content: Joi.string()
+    .min(2)
+    .max(100)
+    .required()
+});
+
+export { userSchema, todoSchema, userSchemaLogin };

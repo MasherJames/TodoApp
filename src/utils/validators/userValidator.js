@@ -1,11 +1,11 @@
 import Joi from "joi";
 import isEmpty from "./isEmpty";
-import { todoSchema } from "./schemas";
+import { userSchema } from "./schemas";
 
-const todoValidator = data => {
+const userValidator = data => {
   let errors = {};
 
-  Joi.validate(data, todoSchema, err => {
+  Joi.validate(data, userSchema, err => {
     if (err) {
       errors.message = err.details[0].message.replace(/\"/gi, "");
     }
@@ -17,4 +17,4 @@ const todoValidator = data => {
   };
 };
 
-export default todoValidator;
+export default userValidator;

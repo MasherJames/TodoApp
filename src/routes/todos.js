@@ -14,5 +14,6 @@ todoRouter.post(
 todoRouter.get("/", todoController.getAllTodos);
 
 todoRouter.get("/:id", todoController.getTodo);
+todoRouter.delete("/:id", todoController.deleteTodo);
 
 export default todoRouter;

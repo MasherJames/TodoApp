@@ -63,4 +63,25 @@ export default class TodoController {
       });
     }
   }
+
+  static async deleteTodo(req, res) {
+    try {
+      const deletedTodo = await Todo.destroy({
+        returning: true,
+        where: { id: req.params.id }
+      });
+      if (!deletedTodo) {
+        return res.status(404).json({
+          Message: "Todo does not exist"
+        });
+      }
+      return res.status(200).json({
+        Message: "Todo deleted successfully"
+      });
+    } catch (error) {
+      return res.status(400).json({
+        Message: "An error occured when trying to delete"
+      });
+    }
+  }
 }

@@ -255,5 +255,35 @@ describe("User Authentication test", () => {
           done();
         });
     });
+
+    it("Should complain if no email", done => {
+      const registeredUser = {
+        password: "testpassword"
+      };
+      chai
+        .request(app)
+        .post("/api/v1/users/login")
+        .send(registeredUser)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal("email is required");
+          done();
+        });
+    });
+
+    it("Should complain if no password", done => {
+      const registeredUser = {
+        email: "test@gmail.com"
+      };
+      chai
+        .request(app)
+        .post("/api/v1/users/login")
+        .send(registeredUser)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal("password is required");
+          done();
+        });
+    });
   });
 });

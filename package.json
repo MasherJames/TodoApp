@@ -5,9 +5,9 @@
     "license": "MIT",
     "scripts": {
         "start": "nodemon --exec babel-node src/server.js",
-        "migrate": "sequelize db:migrate",
-        "rollback": "sequelize db:migrate:undo:all",
-        "rollbackMigrate": "sequelize db:migrate:undo:all && sequelize db:migrate"
+        "db:migrate": "sequelize db:migrate",
+        "db:unmigrate": "sequelize db:migrate:undo:all",
+        "test": "NODE_ENV=test yarn run db:unmigrate && NODE_ENV=test yarn run db:migrate && NODE_ENV=test mocha ./tests/**/*.test.js  --require babel-register  --require babel-polyfill --exit"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
@@ -28,6 +28,14 @@
     "devDependencies": {
         "@babel/core": "^7.3.4",
         "@babel/node": "^7.2.2",
-        "@babel/preset-env": "^7.3.4"
+        "@babel/polyfill": "^7.2.5",
+        "@babel/preset-env": "^7.3.4",
+        "@babel/register": "^7.0.0",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-register": "^6.26.0",
+        "chai": "^4.2.0",
+        "chai-http": "^4.2.1",
+        "mocha": "^6.0.2"
     }
 }

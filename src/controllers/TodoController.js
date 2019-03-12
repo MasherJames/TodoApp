@@ -89,12 +89,16 @@ export default class TodoController {
     try {
       const id = req.params.id;
       const UserId = req.user.id;
-      const data = req.body;
+      const { title, content } = req.body;
       const updatedTodo = await Todo.update(
-        { ...data },
+        { title, content },
         { returning: true, where: { id, UserId } }
       );
-      console.log(updatedTodo);
+      if (!updatedTodo[0]) {
+        return res.status(404).json({
+          Message: "You don't have a todo with that id "
+        });
+      }
       return res.status(202).json({
         Message: "Todo updated successfully"
       });

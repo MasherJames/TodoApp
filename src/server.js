@@ -28,7 +28,7 @@ app.use(`${prefix}/users/`, userRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({
-    message: "URL DOES NOT EXIST, Please counter check"
+    Message: "URL DOES NOT EXIST, Please counter check"
   });
 });
 

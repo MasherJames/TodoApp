@@ -7,7 +7,10 @@
         "start": "nodemon --exec babel-node src/server.js",
         "db:migrate": "sequelize db:migrate",
         "db:unmigrate": "sequelize db:migrate:undo:all",
-        "test": "NODE_ENV=test yarn run db:unmigrate && NODE_ENV=test yarn run db:migrate && NODE_ENV=test nyc mocha ./tests/**/*.test.js  --require babel-register  --require babel-polyfill --exit"
+        "test": "NODE_ENV=test yarn run db:unmigrate && NODE_ENV=test yarn run db:migrate && NODE_ENV=test nyc mocha ./tests/**/*.test.js  --require babel-register  --require babel-polyfill --exit",
+        "build": "babel . --ignore node_modules,tests,dist -d dist/ ",
+        "clean": "rm -rf dist",
+        "start:prod": "yarn run clean && yarn run build && node dist/src/server.js"
     },
     "nyc": {
         "exclude": [

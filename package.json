@@ -9,6 +9,13 @@
         "db:unmigrate": "sequelize db:migrate:undo:all",
         "test": "NODE_ENV=test yarn run db:unmigrate && NODE_ENV=test yarn run db:migrate && NODE_ENV=test nyc mocha ./tests/**/*.test.js  --require babel-register  --require babel-polyfill --exit"
     },
+    "nyc": {
+        "exclude": [
+            "node_modules",
+            "src/database",
+            "src/config"
+        ]
+    },
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.18.3",

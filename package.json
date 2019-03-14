@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
+    "engines": {
+        "node": "10.15.3"
+    },
     "scripts": {
         "start": "nodemon --exec babel-node src/server.js",
         "db:migrate": "sequelize db:migrate",
@@ -20,6 +23,7 @@
         ]
     },
     "dependencies": {
+        "babel-watch": "^7.0.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.18.3",
         "dotenv": "^6.2.0",

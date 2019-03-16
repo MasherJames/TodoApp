@@ -1,23 +1,16 @@
 <template>
   <div class="container">
-    <h1 class="register-header">Create a todo account</h1>
-    <form @submit="register" class="registerform">
-      <input
-        type="text"
-        v-model="username"
-        name="username"
-        class="register-inputs"
-        placeholder="Username"
-      >
-      <input type="text" v-model="email" name="email" class="register-inputs" placeholder="Email">
+    <h1 class="login-header">Login and create a todo</h1>
+    <form @submit="login" class="loginform">
+      <input type="text" v-model="email" name="email" class="login-inputs" placeholder="Email">
       <input
         type="password"
         v-model="password"
         name="password"
-        class="register-inputs"
+        class="login-inputs"
         placeholder="Password"
       >
-      <button type="submit" class="register-btn">Create Account</button>
+      <button type="submit" class="login-btn">Login</button>
     </form>
   </div>
 </template>
@@ -26,27 +19,26 @@
 import axios from "axios";
 
 export default {
-  name: "Register",
+  name: "Login",
   data() {
     return {
-      username: "",
       email: "",
       password: ""
     };
   },
   methods: {
-    register(e) {
+    login(e) {
       e.preventDefault();
-      const newUser = {
-        username: this.username,
+      const user = {
         email: this.email,
         password: this.password
       };
       axios
-        .post("http://127.0.0.1:5000/api/v1/users/register", newUser)
+        .post("http://127.0.0.1:5000/api/v1/users/login", user)
         .then(res => {
-          if (res.data.Message === "Account successfully created") {
-            this.$router.push("/login");
+          if (res.data.message === "succcessfully loggedin") {
+            localStorage.setItem("token", res.data.token);
+            this.$router.push("/todos");
           }
         })
         .catch(error => {
@@ -66,20 +58,20 @@ export default {
   padding: 4rem;
 }
 
-.registerform {
+.loginform {
   display: flex;
   flex-direction: column;
   width: 50vw;
 }
 
-.register-inputs {
+.login-inputs {
   margin: 1.5rem;
   padding: 1rem;
   border-radius: 2rem;
   outline: none;
   font-size: 1.3rem;
 }
-.register-btn {
+.login-btn {
   width: 25vw;
   margin-left: 2rem;
   padding: 1rem;

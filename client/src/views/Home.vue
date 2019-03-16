@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">h1{Welcome to Todos}</div>
+  <div class="home-page">Create an account or login to create your todos</div>
 </template>
 <script>
 export default {
@@ -7,4 +7,9 @@ export default {
 };
 </script>
 <style scoped>
+.home-page {
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+}
 </style>

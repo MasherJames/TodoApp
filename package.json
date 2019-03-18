@@ -13,7 +13,9 @@
         "test": "NODE_ENV=test yarn run db:unmigrate && NODE_ENV=test yarn run db:migrate && NODE_ENV=test nyc mocha ./tests/**/*.test.js  --require babel-register  --require babel-polyfill --exit",
         "build": "babel . --ignore node_modules,tests,dist -d dist/ ",
         "clean": "rm -rf dist",
-        "start:prod": "yarn run clean && yarn run build && node dist/src/server.js"
+        "start:prod": "yarn run clean && yarn run build && node dist/src/server.js",
+        "client": "yarn serve --prefix client",
+        "dev": "concurrently \"yarn run start\" \"yarn run client\""
     },
     "nyc": {
         "exclude": [
@@ -29,6 +31,8 @@
         "babel-watch": "^7.0.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.18.3",
+        "concurrently": "^4.1.0",
+        "cors": "^2.8.5",
         "dotenv": "^6.2.0",
         "express": "^4.16.4",
         "joi": "^14.3.1",

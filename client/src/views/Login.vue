@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: "Login",
@@ -27,23 +27,18 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["loginUser"]),
     login(e) {
       e.preventDefault();
       const user = {
         email: this.email,
         password: this.password
       };
-      axios
-        .post("http://127.0.0.1:5000/api/v1/users/login", user)
-        .then(res => {
-          if (res.data.message === "succcessfully loggedin") {
-            localStorage.setItem("token", res.data.token);
-            this.$router.push("/todos");
-          }
+      this.loginUser(user)
+        .then(() => {
+          this.$router.push("/todos");
         })
-        .catch(error => {
-          console.log(error);
-        });
+        .catch(err => console.log(err));
     }
   }
 };

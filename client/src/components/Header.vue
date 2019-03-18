@@ -5,15 +5,32 @@
     </div>
 
     <div class="header-di">
-      <router-link to="/register">Register</router-link>
-      <router-link to="/login">Login</router-link>
+      <span v-if="isLoggedIn">
+        <a @click="logoutuser">Logout</a>
+      </span>
+      <span v-else>
+        <router-link to="/register">Register</router-link>
+        <router-link to="/login">Login</router-link>
+      </span>
     </div>
   </header>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    ...mapActions(["logout"]),
+    logoutuser() {
+      this.logout().then(() => this.$router.push("/login"));
+    }
+  },
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isLoggedIn;
+    }
+  }
 };
 </script>
 
@@ -34,5 +51,10 @@ export default {
 
 .header-di a {
   padding: 1rem;
+  cursor: pointer;
+}
+
+.header-di a:hover {
+  background-color: rgb(83, 82, 82);
 }
 </style>

@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import axios from "axios";
-
+import { mapActions } from "vuex";
 export default {
   name: "Register",
   data() {
@@ -35,6 +34,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["addUser"]),
     register(e) {
       e.preventDefault();
       const newUser = {
@@ -42,16 +42,11 @@ export default {
         email: this.email,
         password: this.password
       };
-      axios
-        .post("http://127.0.0.1:5000/api/v1/users/register", newUser)
-        .then(res => {
-          if (res.data.Message === "Account successfully created") {
-            this.$router.push("/login");
-          }
+      this.addUser(newUser)
+        .then(() => {
+          this.$router.push("/login");
         })
-        .catch(error => {
-          console.log(error);
-        });
+        .catch(err => console.log(err));
     }
   }
 };

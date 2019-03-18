@@ -4,6 +4,7 @@ import morgan from "morgan";
 import passport from "passport";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 import passportConf from "./config/passport";
 import { todoRouter, userRouter } from "./routes";
 
@@ -11,6 +12,7 @@ dotenv.config();
 
 const app = express();
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

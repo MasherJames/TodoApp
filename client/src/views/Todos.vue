@@ -11,15 +11,17 @@
         >
       </div>
     </div>
+    <Pagination/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import AddTodo from "../components/AddTodo";
+import Pagination from "../components/Pagination";
 export default {
   name: "Todos",
-  components: { AddTodo },
+  components: { AddTodo, Pagination },
   methods: {
     ...mapActions(["fetchTodos", "removeTodo"])
   },

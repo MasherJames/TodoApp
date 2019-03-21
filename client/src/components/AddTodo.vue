@@ -28,6 +28,8 @@ export default {
         content: this.content
       };
       this.addTodo(todo);
+      this.$data.title = "";
+      this.$data.content = "";
     }
   }
 };

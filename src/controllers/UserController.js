@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 import user from "../database/models";
 
 const User = user.User;
@@ -76,5 +75,19 @@ export default class UserController {
         );
       });
     });
+  }
+
+  static socialAuth(req, res) {
+    const { id, username, email } = req.user;
+    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+      expiresIn: 3600
+    });
+    // (err, token) => {
+    //   res.status(200).json({
+    //     message: "succcessfully loggedin",
+    //     token: `Bearer ${token}`
+    //   });
+    // }
+    // );
   }
 }

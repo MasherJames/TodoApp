@@ -1,5 +1,6 @@
 import passport from "passport";
-import { Strategy as FacebookStrategy } from "passport-facebook";
+// import { Strategy as FacebookStrategy } from "passport-facebook";
+const FacebookStrategy = require("passport-facebook").Strategy;
 import socialStrategy from "../configStrategies";
 import user from "../../database/models";
 

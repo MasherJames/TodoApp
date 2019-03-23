@@ -79,15 +79,14 @@ export default class UserController {
 
   static socialAuth(req, res) {
     const { id, username, email } = req.user;
-    const token = jwt.sign(payload, process.env.SECRET_KEY, {
+    const token = jwt.sign({ id, username, email }, process.env.SECRET_KEY, {
       expiresIn: 3600
     });
-    // (err, token) => {
-    //   res.status(200).json({
-    //     message: "succcessfully loggedin",
-    //     token: `Bearer ${token}`
-    //   });
-    // }
-    // );
+    const payload = {
+      message: "succcessfully loggedin",
+      token: `Bearer ${token}`
+    };
+
+    console.log(token);
   }
 }

@@ -19,13 +19,13 @@ userRouter.post(
 );
 
 userRouter.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", { scope: ["email"] })
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email"] })
 );
 
 userRouter.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", UserController.socialAuth)
+  "/auth/google/callback",
+  passport.authenticate("google", UserController.socialAuth)
 );
 
 export default userRouter;

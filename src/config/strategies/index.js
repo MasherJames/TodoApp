@@ -1,3 +1,3 @@
-import facebookStrategy from "./facebookStrategy";
+import googleStrategy from "./googleStrategy";
 
-export { facebookStrategy };
+export { googleStrategy };

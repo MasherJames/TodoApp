@@ -1,7 +1,7 @@
 import passJwt from "passport-jwt";
 import dotenv from "dotenv";
 import user from "../database/models";
-import { facebookStrategy } from "./strategies";
+import { googleStrategy } from "./strategies";
 dotenv.config();
 
 const User = user.User;
@@ -29,5 +29,5 @@ export default passport => {
     })
   );
 
-  facebookStrategy();
+  googleStrategy();
 };

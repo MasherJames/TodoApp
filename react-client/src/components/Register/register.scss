@@ -1,0 +1,41 @@
+.container {
+    height: 90vh;
+    display: flex;
+    .register {
+        background-color: #fce0e7;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        width: 40vw;
+        margin: auto;
+        .register-head {
+            text-transform: uppercase;
+            border-bottom: 3px solid #ff3366;
+        }
+        .have-account {
+            color: rgb(92, 91, 91);
+            margin-top: 1rem;
+        }
+        .signUpForm {
+            display: flex;
+            flex-direction: column;
+            width: 30vw;
+            &>* {
+                margin: 1rem;
+                padding: 1rem
+            }
+            .signUpField {
+                outline: none;
+                font-size: 1.1rem;
+            }
+            .btn {
+                background-color: #ff3366;
+                text-transform: uppercase;
+                border: none;
+                border-radius: .3rem;
+            }
+        }
+    }
+}

@@ -14,16 +14,16 @@ const Register = () => {
   return (
     <Fragment>
       <form className="signUpForm">
-        <input type="email" className="signUpField" placeholder="enter email" />
+        <input type="email" className="signUpField" placeholder="Enter email" />
         <input
           type="text"
           className="signUpField"
-          placeholder="enter username"
+          placeholder="Enter username"
         />
         <input
           type="password"
           className="signUpField"
-          placeholder="enter password"
+          placeholder="Enter password"
         />
       </form>
     </Fragment>

@@ -1,17 +1,62 @@
-import React, { Fragment, useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import registerReducer from "../../reducers/registerReducer";
 import "./register.scss";
 
 const initialState = {
   isRegistering: false,
   success: false,
-  error: null,
+  error: {},
   user: {}
 };
 
 const Register = () => {
   const [state, dispatch] = useReducer(registerReducer, initialState);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const postUser = user => {
+    dispatch({ type: "REGISTER_REQUEST" });
+    axios
+      .post("http://127.0.0.1:5000/api/v1/users/register", user)
+      .then(res =>
+        dispatch({
+          type: "REGISTER_SUCCESS",
+          user: res.data.newUser
+        })
+      )
+      .catch(err =>
+        dispatch({ type: "REGISTER_FAILURE", error: err.response.data })
+      );
+    console.log(state);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const newUser = {
+      username,
+      email,
+      password
+    };
+    postUser(newUser);
+
+    // setUsername("");
+    // setEmail("");
+    // setPassword("");
+  };
+
+  const handleUsernameChange = e => {
+    setUsername(e.target.value);
+  };
+  const handleEmailChange = e => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = e => {
+    setPassword(e.target.value);
+  };
 
   return (
     <div className="container">
@@ -20,19 +65,28 @@ const Register = () => {
         <Link to="/login" className="have-account">
           Already have an account ?
         </Link>
-        <form className="signUpForm">
+        <form onSubmit={handleSubmit} className="signUpForm">
           <input
             type="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
             className="signUpField"
             placeholder="Enter email"
           />
           <input
             type="text"
+            name="username"
+            value={username}
+            onChange={handleUsernameChange}
             className="signUpField"
             placeholder="Enter username"
           />
           <input
             type="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
             className="signUpField"
             placeholder="Enter password"
           />

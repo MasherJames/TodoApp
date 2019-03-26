@@ -9,9 +9,13 @@ const registerReducer = (state, action) => {
     case REGISTER_REQUEST:
       return { ...state, isRegistering: true };
     case REGISTER_SUCCESS:
-      return { ...state, isRegistering: false, success: action.payload };
+      return { ...state, isRegistering: false, success: true };
     case REGISTER_FAILURE:
-      return { ...state, isRegistering: false, error: action.payload };
+      return {
+        ...state,
+        isRegistering: false,
+        error: action.error
+      };
 
     default:
       return state;

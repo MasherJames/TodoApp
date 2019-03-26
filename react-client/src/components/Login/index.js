@@ -7,7 +7,7 @@ const Login = () => {
     <div className="container">
       <div className="login">
         <h2 className="login-head">Sing In</h2>
-        <Link to="/login" className="lack-account">
+        <Link to="/register" className="lack-account">
           Not a member yet? Sign Up here
         </Link>
         <form className="loginUpForm">
@@ -23,7 +23,7 @@ const Login = () => {
             placeholder="Enter password"
           />
           <button type="submit" className="loginField btn">
-            Login up
+            Login
           </button>
         </form>
       </div>

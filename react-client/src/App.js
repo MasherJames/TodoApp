@@ -3,9 +3,9 @@ import AppRoutes from "./routes";
 import { AppContext } from "./contex";
 
 const App = () => {
-  const [newUser, setNewUser] = useState("");
+  const [current, setCurrentUser] = useState("");
 
-  const context = { newUser, setNewUser };
+  const context = { current, setCurrentUser };
   return (
     <AppContext.Provider value={{ context }}>
       <AppRoutes />

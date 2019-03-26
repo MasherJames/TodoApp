@@ -7,13 +7,14 @@ import {
 const registerReducer = (state, action) => {
   switch (action.type) {
     case REGISTER_REQUEST:
-      return { ...state, isRegistering: true };
+      return { ...state, isRegistering: true, user: action.user };
     case REGISTER_SUCCESS:
       return { ...state, isRegistering: false, success: true };
     case REGISTER_FAILURE:
       return {
         ...state,
         isRegistering: false,
+        success: false,
         error: action.error
       };
 

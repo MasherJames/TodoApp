@@ -1,7 +1,8 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import registerReducer from "../../reducers/registerReducer";
+import { AppContext } from "../../contex";
 import "./register.scss";
 
 const initialState = {
@@ -13,12 +14,13 @@ const initialState = {
 
 const Register = () => {
   const [state, dispatch] = useReducer(registerReducer, initialState);
+  const { context } = useContext(AppContext);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const postUser = user => {
-    dispatch({ type: "REGISTER_REQUEST" });
+    dispatch({ type: "REGISTER_REQUEST", user });
     axios
       .post("http://127.0.0.1:5000/api/v1/users/register", user)
       .then(res =>
@@ -30,7 +32,6 @@ const Register = () => {
       .catch(err =>
         dispatch({ type: "REGISTER_FAILURE", error: err.response.data })
       );
-    console.log(state);
   };
 
   const handleSubmit = event => {
@@ -41,11 +42,9 @@ const Register = () => {
       email,
       password
     };
-    postUser(newUser);
 
-    // setUsername("");
-    // setEmail("");
-    // setPassword("");
+    postUser(newUser);
+    context.setCurrentUser(newUser);
   };
 
   const handleUsernameChange = e => {
